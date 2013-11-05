@@ -1,0 +1,37 @@
+<p>
+	<div class="summary" style="margin:0px 0px 1.5em;padding:5px 10px;background-color:#F7F7F7;color:#333333;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;">
+		<iframe frameborder="0" src="http://hits.sinajs.cn/A1/weiboshare.html?url=http%3A%2F%2Fwww.csdn.net%2Farticle%2F2013-10-31%2F2817359&amp;type=3&amp;count=&amp;appkey=&amp;title=%E8%87%AA2009%E5%B9%B4%E6%B7%98%E5%AE%9D%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%81%9A%E2%80%9C%E5%8F%8C%E5%8D%81%E4%B8%80%E2%80%9D%E4%BF%83%E9%94%80%E6%B4%BB%E5%8A%A8%E5%BC%80%E5%A7%8B%EF%BC%8C%E6%AF%8F%E5%B9%B4%E7%9A%84%E2%80%9C%E5%8F%8C%E5%8D%81%E4%B8%80%E2%80%9D%E6%88%90%E4%B8%BA%E4%BA%86%E7%94%B5%E5%95%86%E7%95%8C%E7%9A%84%E9%87%8D%E5%A4%A7%E8%8A%82%E6%97%A5%E3%80%82CTO%E4%BF%B1%E4%B9%90%E9%83%A8%E7%AC%AC114%E6%9C%9F%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%B4%BB%E5%8A%A8%E9%82%80%E8%AF%B7%E5%88%B0%E4%BA%86%E4%BA%AC%E4%B8%9C%E7%A0%94%E5%8F%91%E9%83%A8%E7%89%A9%E6%B5%81%E9%85%8D%E9%80%81%E7%B3%BB%E7%BB%9F%E8%B4%9F%E8%B4%A3%E4%BA%BA%E6%9D%8E%E9%B9%8F%E6%B6%9B%E4%B8%8E%E5%A4%A7%E5%AE%B6%E4%B8%80%E8%B5%B7%E5%88%86%E4%BA%AB%E5%A6%82%E4%BD%95%E8%BF%8E%E6%8E%A5%E2%80%9C%E5%8F%8C%E5%8D%81%E4%B8%80%E2%80%9D%E7%94%B5%E5%95%86%E9%A5%95%E9%A4%AE%E7%9B%9B%E5%AE%B4%E3%80%82&amp;pic=&amp;ralateUid=&amp;language=zh_cn&amp;rnd=1383558682210" width="22" height="16">
+		</iframe>
+<strong>摘要：</strong>自2009年淘宝第一次做“双十一”促销活动开始，每年的“双十一”成为了电商界的重大节日。CTO俱乐部第114期下午茶活动邀请到了京东研发部物流配送系统负责人李鹏涛与大家一起分享如何迎接“双十一”电商饕餮盛宴。
+	</div>
+	<div class="con news_content" style="margin:0px 0px 30px;padding:0px;color:#333333;font-family:Helvetica, Tahoma, Arial, sans-serif;font-size:14px;background-color:#FFFFFF;">
+		<p>
+			北京时间10月29日下午，CTO俱乐部第114期下午茶活动在中关村贝塔咖啡举行。本期活动邀请到了京东研发部物流配送系统负责人李鹏涛与大家一起分享如何迎接“双十一”电商饕餮盛宴。
+		</p>
+		<p style="text-align:center;">
+			<a href="http://cms.csdnimg.cn/article/201310/31/52722b757b85e.jpg" target="_blank"><img src="http://cms.csdnimg.cn/article/201310/31/52722b757b85e_middle.jpg?_=8654" border="0" alt="" />&nbsp;</a>
+		</p>
+		<p style="text-align:center;">
+			京东研发部物流配送系统负责人 李鹏涛&nbsp;
+		</p>
+		<p>
+			自2009年淘宝第一次做“双十一”促销活动开始，每年的“双十一”成为了电商界的重大节日，大到淘宝、京东这样的超级大鳄，小到一些电商商家，均想在这一节日分取一杯羹。那么对于京东及淘宝这样的大型电商平台，他们是如何迎接“双十一”的？可能大家觉得很神秘，但李鹏涛表示，这些准备工作其实在平时的一些分享中也都和大家讲过。
+		</p>
+		<p>
+			活动上，李鹏涛先和大家一起回顾了近几年“双十一”活动的销售数据。最早做“双十一”促销活动的是淘宝，是在2009年，当时的规模还非常小，销售额基本是个位数。而到了2010年，“双十一”的销售数据已经能够在10亿左右了，及至2011年，数据突增至40亿，2012年则迅速增长至240亿。这几年来，销售数据基本以400%的增速提升。李鹏涛表示京东的节奏与电商整体数据基本持平，“双十一”也保持400%的增长率。
+		</p>
+		<p>
+			<span style="color:#E36C09;"><b>电商发展推动电商行业技术的提升&nbsp;技术“反哺”电商应对高峰期</b></span>
+		</p>
+		<p>
+			电商行业的快速发展，每年的销售增长背后离不开技术的支持。但李鹏涛也表示，时势造英雄，电商的快速发展也在推动电商行业技术能力的提升。由于电商每年的增长需求，使得电商系统承载的规模每年都有2倍乃至4-5倍的提升。而这样的提升并不是通过纯粹的堆硬件机器方法就能够解决的，这种情况下就需要技术人员来解决问题。很多人加入淘宝、京东，可能并不是技术比别的公司好、天分有多高，关键是因为业务方面有需求，在此需求下必须想办法解决问题。相对传统行业信息化每年10%甚至更低的增长，这对技术的要求并不急迫，技术人员也就没有足够的动力挑战新技术。
+		</p>
+		<p>
+			除了多倍的快速增长，电商系统的特殊性也要求技术人员要做好准备。通过系统容量增长对比我们能够看出，以京东为例（<span style="color:#E36C09;">讲义第4页图例中的系统A</span>），在每年6月份会有一个爆发的增长，那几天的订单是平时的2-3倍，而到“双十一”的时候还会出现一个较大的增长。而传统行业（<span>讲义第4页图例中的系统B</span>）的增长则一直保持平缓。相对来说，对于A系统，公司会愿意给他投入资源，因为比较有预见性，公司愿意对技术给予支持。
+		</p>
+	</div>
+</p>
+<p>
+	<span style="background-color:#003399;"><img src="http://localhost:3000/editor/plugins/emoticons/images/10.gif" border="0" alt="" /><br />
+</span> 
+</p>

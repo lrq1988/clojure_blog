@@ -1,0 +1,806 @@
+<h1 style="color:#333333;font-family:Arial;background-color:#FFFFFF;">
+	compojure
+</h1>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	Compojure是一个在Ring基础上开发出的小型路由库，可使得web程序由小而独立的部分组成。使用时，在project.clj文件添加依赖：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">[compojure&nbsp;"1.1.5"]&nbsp;&nbsp;</span></span>
+			</li>
+		</ol>
+	</div>
+<br />
+	<h1>
+		<a name="t1"></a>Getting Started
+	</h1>
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	使用compojure最简单的方式是使用clojure构建工具leiningen。如果你还没有，那就先去下载安装leiningen。为了使得我们下面的说明能正常运行，需要使用leiningen 2.0.0或者最近版本。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<br />
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	那么，我们使用"compojure"模板创建一个新工程：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">lein&nbsp;new&nbsp;compojure&nbsp;hello-world&nbsp;&nbsp;</span></span>
+			</li>
+		</ol>
+	</div>
+<br />
+这创建了一个基本的包含小型web程序的工程骨架。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	现在可以cd工程目录，使用leiningen启动开发服务器：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">cd&nbsp;hello-world&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">lein&nbsp;ring&nbsp;server&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+这个服务器将使用一个没有被占用的端口并打开一个浏览器窗口。如果改动了其中的源文件（src目录下），服务器将为你自动重载。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<br />
+</div>
+<h1 style="color:#333333;font-family:Arial;background-color:#FFFFFF;">
+	<a name="t2"></a>Routes In Detail
+</h1>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	Compojure的路由类似这样：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">(GET&nbsp;"/user/:id"&nbsp;[id]&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;(str&nbsp;"&lt;h1&gt;Hello&nbsp;user&nbsp;"&nbsp;id&nbsp;"&lt;/h1&gt;"))&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+Routes（路由）返回Ring handler函数。撇除语法来看，没有什么神奇之处。他们（Routes）仅仅提供了定义函数的简洁方式，以处理HTTP请求。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<br />
+</div>
+<h2 style="color:#333333;font-family:Arial;background-color:#FFFFFF;">
+	<a name="t3"></a>Matching the HTTP method
+</h2>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	我们拆解这个语法。第一个符号：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">GET&nbsp;&nbsp;</span></span>
+			</li>
+		</ol>
+	</div>
+<br />
+这是Compojure提供的几个路由宏之一。这个宏检测HTTP请求方法，如果方法不是”GET“，函数返回nil。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	其他可用宏有POST、PUT、DELETE、OPTIONS、PATCH和HEAD。如果想匹配任意的HTTP方法，使用 ANY 宏。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<br />
+</div>
+<h2 style="color:#333333;font-family:Arial;background-color:#FFFFFF;">
+	<a name="t4"></a>Matching the URI
+</h2>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	下一符号：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">"/user/:id"&nbsp;&nbsp;</span></span>
+			</li>
+		</ol>
+	</div>
+<br />
+这是Clout定义的使用路由语法的一个字符串。这在Ruby on Rails和Sinatra更常见一些。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	它匹配请求的URI。”:id“将匹配”/“或者”.“下的任意子路径，并且将结果置于"id"参数中。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	如果我们想更具体一些，还可以为这个参数定义一个自定义的正则表达式：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">["/user/:id",&nbsp;:id&nbsp;#"[0-9]+"]&nbsp;&nbsp;</span></span>
+			</li>
+		</ol>
+	</div>
+<br />
+对于HTTP方法，如果URI匹配不到任何自定义路径，那么路由函数将返回nil。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<br />
+</div>
+<h2 style="color:#333333;font-family:Arial;background-color:#FFFFFF;">
+	<a name="t5"></a>Destructuring the request
+</h2>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	在HTTP方法和URI匹配之后：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">[id]&nbsp;&nbsp;</span></span>
+			</li>
+		</ol>
+	</div>
+<br />
+宏的第二个参数提供了从请求map中检索信息的方法。它可能是一个由参数组成的向量，也或者其他完整的clojure结构形式。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	换言之，上述语法绑定符号”id“到请求map中的参数”id“，这种情形更受Clout路由串欢迎。我们也可以使用一个标准得Clojure结构形式：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">{{id&nbsp;:id}&nbsp;:params}&nbsp;&nbsp;</span></span>
+			</li>
+		</ol>
+	</div>
+<br />
+这能提供更多控制权，但不如向量语法简洁。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<br />
+</div>
+<h2 style="color:#333333;font-family:Arial;background-color:#FFFFFF;">
+	<a name="t6"></a>Returning a response
+</h2>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	一旦HTTP请求被匹配和结构，路由的其他部分包装成隐式的行为就会被阻止，而仅仅像正常的函数：<span></span>（译者注：此处翻译牵强，不过大概意思应该能明白）
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">(str&nbsp;"&lt;h1&gt;Hello&nbsp;user&nbsp;"&nbsp;id&nbsp;"&lt;/h1&gt;"))&nbsp;&nbsp;</span></span>
+			</li>
+		</ol>
+	</div>
+<br />
+返回值被很智能地处理。这种情况下返回字符串，它被转换成标准的response：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">{:status&nbsp;200&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;:headers&nbsp;{"Content-Type"&nbsp;"text/html;&nbsp;charset=utf-8"}&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;:body&nbsp;"&lt;h1&gt;Hello&nbsp;user&nbsp;1&lt;/h1&gt;"}&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+	<p>
+		<br />
+<span style="font-size:10px;"><span style="font-family:Helvetica, arial, freesans, clean, sans-serif;line-height:25px;">&nbsp;</span><a target="_blank" href="https://github.com/weavejester/compojure/blob/master/src/compojure/response.clj">compojure.response/render</a></span><span style="font-family:Helvetica, arial, freesans, clean, sans-serif;line-height:25px;"><span style="font-size:10px;">&nbsp;将任意一种类型（String、map、File等）的返回值处理成合适的response。它也支持你使用自定义类型重写。</span></span>
+	</p>
+</div>
+<p style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<span style="font-family:Helvetica, arial, freesans, clean, sans-serif;line-height:25px;"><span style="font-size:10px;"><br />
+</span></span>
+</p>
+<h1 style="color:#333333;font-family:Arial;background-color:#FFFFFF;">
+	<a name="t7"></a><span style="font-family:Helvetica, arial, freesans, clean, sans-serif;line-height:25px;"><span style="font-size:10px;"></span></span>
+</h1>
+<h1 style="color:#333333;font-family:Arial;background-color:#FFFFFF;">
+	<a name="t8"></a>Destructuring Syntax
+</h1>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	Compojure提供了俩种解构：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	1、clojure类型的，可能使用let 等特殊形式（<a target="_blank" href="http://clojure.org/special_forms">special form</a>） 。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	2、compojure特定类型的，被设计用于解析请求map：<span></span>
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	&nbsp; &nbsp; &nbsp; &nbsp; ；查询字符串（和形式）参数
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	&nbsp; &nbsp; &nbsp; &nbsp; ；URL路径的部分
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	*注意，为清楚起见，下面提供了一个REPL示范。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<br />
+</div>
+<h2 style="color:#333333;font-family:Arial;background-color:#FFFFFF;">
+	<a name="t9"></a>Regular Clojure Destrucuring
+</h2>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	如果你应用一个map或者符号，Clojure的解构语法将会用在Ring请求map上面。例如，此处使用Clojure语法绑定一个特定的参数到一个变量：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">(GET&nbsp;"/:foo"&nbsp;{{foo&nbsp;:foo}&nbsp;:params}&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;(str&nbsp;"Foo&nbsp;=&nbsp;"&nbsp;foo))&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+	<h2>
+		<a name="t10"></a>Compojure-specific Destructuring
+	</h2>
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	鉴于通常的解构相当繁琐，Compojure提供了一个专门的解构形式。若你应用一个向量，Compojure将使用这种定制的解构语法。上面的例子能更加简洁：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">(GET&nbsp;"/:foo"&nbsp;[foo]&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;(str&nbsp;"Foo&nbsp;=&nbsp;"&nbsp;foo))&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+Compojure参数解构语法有三类功能。第一直接绑定参数到相同名字的符号。例如，假设我们有如下请求map：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">{:request-method&nbsp;:get&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;:uri&nbsp;"/foobar"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;:headers&nbsp;{}&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;:params&nbsp;{:x&nbsp;"foo",&nbsp;:y&nbsp;"bar",&nbsp;:z&nbsp;"baz",&nbsp;:w&nbsp;"qux"}}&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+然后，我们可以使用一个符号组成的向量绑定每个参数：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">[x&nbsp;y&nbsp;z]&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">x&nbsp;-&gt;&nbsp;"foo"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">y&nbsp;-&gt;&nbsp;"bar"&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">z&nbsp;-&gt;&nbsp;"baz"&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+要绑定所有未分配参数的map，可以使用符号 &amp; ，&amp;后面跟一个变量名：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">[x&nbsp;y&nbsp;&amp;&nbsp;z]&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">x&nbsp;-&gt;&nbsp;"foo"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">y&nbsp;-&gt;&nbsp;"bar"&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">z&nbsp;-&gt;&nbsp;{:z&nbsp;"baz",&nbsp;:w&nbsp;"qux"}&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+这种行为跟在正常的clojure绑定中的 &amp; 类似。不同之处在于，对获得未绑定部分，我们用map代替了list。
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<br />
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	最后，你可以使用 :as 关键字将整个请求map分配给一个符号：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">[x&nbsp;y&nbsp;:as&nbsp;r]&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">x&nbsp;-&gt;&nbsp;"foo"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">y&nbsp;-&gt;&nbsp;"bar"&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">r&nbsp;-&gt;&nbsp;{:request-method&nbsp;:get&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:uri&nbsp;"/foobar"&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:headers&nbsp;{}&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:params&nbsp;{:x&nbsp;"foo",&nbsp;:y&nbsp;"bar",&nbsp;:z&nbsp;"baz",&nbsp;:w&nbsp;"qux"}}&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+你也可以绑定一个clojure解构map到 :as 关键字：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">[x&nbsp;y&nbsp;:as&nbsp;{u&nbsp;:uri}]&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">x&nbsp;-&gt;&nbsp;"foo"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">y&nbsp;-&gt;&nbsp;"bar"&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">u&nbsp;-&gt;&nbsp;"/foobar"}&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+	<h2>
+		<a name="t11"></a>REPL Demonstration
+	</h2>
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	注释标签 ;;-&gt;后面是路由呼叫响应：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">user&gt;&nbsp;(use&nbsp;'compojure.core)&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">nil&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(require&nbsp;'[compojure.handler&nbsp;:as&nbsp;handler])&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">nil&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(require&nbsp;'[compojure.route&nbsp;:as&nbsp;route])&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">nil&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(def&nbsp;my-request&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{:request-method&nbsp;:get&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:uri&nbsp;"/my-uri"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:headers&nbsp;[]&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:params&nbsp;{:x&nbsp;"foo"&nbsp;:y&nbsp;"bar"&nbsp;:z&nbsp;"baz"&nbsp;:w&nbsp;"qux"}})&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">#'user/my-request&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(defroutes&nbsp;my-3-parameter-route&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(GET&nbsp;"/:my"&nbsp;[x&nbsp;y&nbsp;z]&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(str&nbsp;"x&nbsp;-&gt;&nbsp;"&nbsp;x&nbsp;";&nbsp;"&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"y&nbsp;-&gt;&nbsp;"&nbsp;y&nbsp;";&nbsp;"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"z&nbsp;-&gt;&nbsp;"&nbsp;z)))&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">#'user/my-3-parameter-route&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(my-3-parameter-route&nbsp;my-request)&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;{:status&nbsp;200&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;:headers&nbsp;{"Content-Type"&nbsp;"text/html;&nbsp;charset=utf-8"},&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;:body&nbsp;"x&nbsp;-&gt;&nbsp;foo;&nbsp;y&nbsp;-&gt;&nbsp;bar;&nbsp;z&nbsp;-&gt;&nbsp;baz"}&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(defroutes&nbsp;my-2-parameter-and-remainder-route&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(GET&nbsp;"/:my"&nbsp;[x&nbsp;y&nbsp;&amp;&nbsp;z]&nbsp;;&nbsp;&amp;&nbsp;binds&nbsp;remainder&nbsp;of&nbsp;request&nbsp;map&nbsp;to&nbsp;z&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(str&nbsp;"x&nbsp;-&gt;&nbsp;"&nbsp;x&nbsp;";&nbsp;"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"y&nbsp;-&gt;&nbsp;"&nbsp;y&nbsp;";&nbsp;"&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"z&nbsp;-&gt;&nbsp;"&nbsp;z)))&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">#'user/my-2-parameter-and-remainder-route&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(my-2-parameter-and-remainder-route&nbsp;my-request)&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;{:status&nbsp;200,&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;:headers&nbsp;{"Content-Type"&nbsp;"text/html;&nbsp;charset=utf-8"},&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;:body&nbsp;"x&nbsp;-&gt;&nbsp;foo;&nbsp;y&nbsp;-&gt;&nbsp;bar;&nbsp;z&nbsp;-&gt;&nbsp;{:my&nbsp;\"my-uri\",&nbsp;:z&nbsp;\"baz\",&nbsp;:w&nbsp;\"qux\"}"}&nbsp;&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(defroutes&nbsp;my-remainder-symbol-route&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(GET&nbsp;"/:my"&nbsp;[x&nbsp;y&nbsp;:as&nbsp;r]&nbsp;;&nbsp;:as&nbsp;keyword&nbsp;assigns&nbsp;entire&nbsp;request&nbsp;map&nbsp;to&nbsp;symbol&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(str&nbsp;"x&nbsp;-&gt;&nbsp;"&nbsp;x&nbsp;";&nbsp;"&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"y&nbsp;-&gt;&nbsp;"&nbsp;y&nbsp;";&nbsp;"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"r&nbsp;-&gt;&nbsp;"&nbsp;r)))&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">#'user/my-remainder-symbol-route&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(my-remainder-symbol-route&nbsp;my-request)&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;{:status&nbsp;200,&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;:headers&nbsp;{"Content-Type"&nbsp;"text/html;&nbsp;charset=utf-8"},&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;:body&nbsp;"x&nbsp;-&gt;&nbsp;foo;&nbsp;y&nbsp;-&gt;&nbsp;bar;&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r&nbsp;-&gt;&nbsp;{:route-params&nbsp;{:my&nbsp;\"my-uri\"},&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:request-method&nbsp;:get,&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:uri&nbsp;\"/my-uri\",&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:headers&nbsp;[],&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:params&nbsp;{:my&nbsp;\"my-uri\",&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:z&nbsp;\"baz\",&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:y&nbsp;\"bar\",&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:x&nbsp;\"foo\",&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:w&nbsp;\"qux\"}}"}&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(defroutes&nbsp;my-destructuring-map-route&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(GET&nbsp;"/:my"&nbsp;[x&nbsp;y&nbsp;:as&nbsp;{u&nbsp;:uri}]&nbsp;;&nbsp;:as&nbsp;keyword&nbsp;and&nbsp;destructuring&nbsp;map&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;to&nbsp;bind&nbsp;:uri&nbsp;value&nbsp;to&nbsp;u&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(str&nbsp;"x&nbsp;-&gt;&nbsp;"&nbsp;x&nbsp;";&nbsp;"&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"y&nbsp;-&gt;&nbsp;"&nbsp;y&nbsp;";&nbsp;"&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"u&nbsp;-&gt;&nbsp;"&nbsp;u)))&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">#'user/my-destructuring-map-route&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">user&gt;&nbsp;(my-destructuring-map-route&nbsp;my-request)&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;{:status&nbsp;200,&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;:headers&nbsp;{"Content-Type"&nbsp;"text/html;&nbsp;charset=utf-8"},&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">;;-&gt;&nbsp;&nbsp;:body&nbsp;"x&nbsp;-&gt;&nbsp;foo;&nbsp;y&nbsp;-&gt;&nbsp;bar;&nbsp;u&nbsp;-&gt;&nbsp;/my-uri"}&nbsp;&nbsp;</span>
+			</li>
+		</ol>
+	</div>
+<br />
+	<h1>
+		<a name="t12"></a>Nesting routes
+	</h1>
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	Routes可以嵌套使用context宏：
+</div>
+<div style="color:#333333;font-family:Arial;font-size:14px;background-color:#FFFFFF;">
+	<div class="dp-highlighter bg_plain" style="font-family:Consolas, 'Courier New', Courier, mono, serif;font-size:12px;background-color:#E7E5DC;margin:18px 0px !important;">
+		<div class="bar">
+			<div class="tools" style="padding:3px 8px 10px 10px;font-size:9px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;color:silver;background-color:#F8F8F8;">
+				<b>[plain]</b>&nbsp;<a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="ViewSource">view plain</a><a href="http://blog.csdn.net/lrq1988/article/details/12155119#" class="CopyToClipboard">copy</a>
+				<div>
+				</div>
+			</div>
+		</div>
+		<ol style="background-color:#FFFFFF;color:#5C5C5C;">
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;"><span style="background-color:inherit;">(defroutes&nbsp;api-routes&nbsp;&nbsp;</span></span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;(GET&nbsp;"/something"&nbsp;[]&nbsp;...))&nbsp;&nbsp;&nbsp;;&nbsp;matches&nbsp;/api/something&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">(defroutes&nbsp;main-routes&nbsp;&nbsp;</span>
+			</li>
+			<li class="alt" style="color:inherit;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;(context&nbsp;"/api"&nbsp;[]&nbsp;api-routes)&nbsp;&nbsp;</span>
+			</li>
+			<li class="" style="background-color:#F8F8F8;">
+				<span style="color:black;background-color:inherit;">&nbsp;&nbsp;other-routes)&nbsp;&nbsp;</span>
+			</li>
+			<li>
+			</li>
+		</ol>
+	</div>
+</div>
