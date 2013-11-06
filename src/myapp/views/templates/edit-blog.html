@@ -1,0 +1,106 @@
+{% extends "myapp/views/templates/base.html" %}
+{% block content %}
+		<style>
+			form {
+				margin: 0;
+			}
+			textarea {
+				display: block;
+			}
+		</style>
+		<link rel="stylesheet" href="editor/themes/default/default.css" />
+		<script charset="utf-8" src="editor/kindeditor-min.js"></script>
+		<script charset="utf-8" src="editor/lang/zh_CN.js"></script>
+		<script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="content"]', {
+					allowFileManager : true
+				});
+			});
+		</script>
+	
+		<div class="tabbable tabbable-custom boxless">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab_1" data-toggle="tab">文章发布</a></li>
+				<li><a class="" href="#tab_2" data-toggle="tab">文章管理</a></li>
+				<li><a href="#tab_3" data-toggle="tab">标签管理</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab_1">
+					<form id="blogForm" action="/update-blog" method="post">
+					<div>
+						<input type="hidden" name="id" value="{{blog.id}}"/>
+						<input type="hidden" name="postdate" value="{{blog.postdate}}">
+						<input type="hidden" name="uuid" value="{{blog.uuid}}"/>
+						<input type="hidden" name="filepath" value="{{blog.filepath}}"/>	
+						<input type="text" id="txtTitle" name="title" style="width:560px; height:20px; float:left;" maxlength="100" title="文章标题" value="{{blog.title}}"/>
+					</div>
+					<br>
+					<div>
+						<textarea name="content" style="width:800px;height:400px;visibility:hidden;">{{blog.content}}</textarea>
+					</div>
+					<div></div>
+					<div>
+						<i class="icon-tags"></i> 
+						{% for tag in tags%}
+						{% for mytag in mytags %}
+						
+						<script>
+							var tag='{{tag.id}}';
+							var mytag='{{mytag}}';
+							var tagname='{{tag.tagname}}';
+							var id="tag"+tag+mytag;
+							if(tag==mytag){
+								document.write("<a href='/read-blog-by-tag?tagid={{tag.id}}'>"+tagname+"</a> ");
+							}
+						</script>
+					
+						{% endfor %}
+						{% endfor %}
+						<br/>
+						 
+						<br/>
+						{% for tag in tags %}
+						<input type="checkbox" name="tagid" value="{{tag.id}}">{{tag.tagname}}</input> &nbsp;&nbsp;
+						{% endfor %}
+						<br/>
+						<input type="hidden" name="tag" id="tag" value="{{blog.tag}}"></input>
+					</div>
+					<br/>
+					<div >
+						<button type="" id="blogSubmit" class="btn blue"><i class="icon-ok"></i> 发布</button>
+						<button type="" id="blogCancel" class="btn">取消</button>
+					</div>
+					</form>
+				</div>
+
+				<div class="tab-pane " id="tab_2">
+					this is tab_2...
+				</div>
+			</div>
+		</div>
+		
+		<!-- click button event  -->
+		<script src="{{context}}/js/jquery-1.7.2.js" type="text/javascript"></script>
+		<script>
+			jQuery(document).ready(function(){
+				$("#blogSubmit").click(function(){
+					var tag=$("input[name='tagid']");
+					var oldval=$("#tag").val();
+					var size=tag.size();
+					var tagval="";
+					for(var i=0;i<size;i++)
+					if(tag[i].checked){
+						tagval+=" "+tag[i].value+" ";
+					}
+					if(tagval=="")tagval=oldval;
+					$("#tag").val(tagval);
+					if(("#blogForm").attr("submited")==false){
+						$("#blogForm").submit();
+						$("#blogForm").attr("submited",true);
+					}
+				});
+			});
+		</script>
+{% endblock %}

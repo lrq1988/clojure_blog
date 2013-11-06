@@ -1,0 +1,126 @@
+{% extends "myapp/views/templates/base.html" %}
+
+
+{% block content %}
+<div class="span12 blog-page">
+<div class="row-fluid">
+<div class="span9 article-block">
+<h1>二维码工具</h1>
+<div class="blog-tag-data">
+	
+	<script src="http://app.baidu.com/static/appstore/monitor.st"></script>
+					
+</div>
+			
+		<div class="span3 blog-sidebar">
+
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption"><i class="icon-reorder"></i>关于我</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+						</div>
+					</div>
+					<div class="portlet-body" style="display:block">
+						<p>北京小码农一枚，闷骚宅，热爱阅读，喜欢文学、经济学和编程。2011年误打误撞进入编程界，几乎是从一无所知到现在非常热爱这个行业。希望一直写程序，学java两年有余，近期关注clojure、hadoop、storm。</p>
+						<p>Felix  by  2013.11.11</p>
+					</div>
+				</div>
+
+				<div class="tabbable tabbable-custom">
+
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#tab_1_1">新浪微博</a></li>
+						<li class=""><a data-toggle="tab" href="#tab_1_2">Github</a></li>
+						<li class=""><a data-toggle="tab" href="#tab_1_3">联系我</a></li>
+					</ul>
+
+					<div class="tab-content">
+						<div id="tab_1_1" class="tab-pane active">
+							<a  class="fancybox-button" data-rel="fancybox-button" href="http://weibo.com/54lrq" target="blank">			
+								<img alt="" src="{{context}}/upload/me/img/sinaweibo.jpg">
+							</a>
+						</div>
+						<div id="tab_1_2" class="tab-pane">
+							<a  class="fancybox-button" data-rel="fancybox-button" href="https://github.com/lrq1988" target="blank">			
+								<img alt="" src="{{context}}/upload/me/img/github.jpg">
+							</a>
+						</div>
+						<div id="tab_1_3" class="tab-pane">
+							<a  class="fancybox-button" data-rel="fancybox-button" href="mailto:felixlisp@gmail.com">			
+								<p>felixlisp@gmail.com</p>
+						    </a>
+						</div>
+					</div>
+
+				</div>
+
+				<h2>中文博客</h2>
+				
+				<div class="top-news">
+					<a href="http://blog.zhaojie.me/" target="blank" class="btn red">
+						<span>老赵博客--编程之美</span>
+						<i class="icon-briefcase top-news-icon"></i>
+					</a>
+					<a href="http://devtext.com/" target="blank" class="btn purple">
+						<span>方伟</span>
+						<i class="icon-briefcase top-news-icon"></i>
+					</a>
+					<a href="http://chinese.catchen.me/" target="blank" class="btn green">
+						<span>陈广琛</span>
+						<i class="icon-briefcase top-news-icon"></i>
+					</a>
+					<a href="http://dbanotes.net/" target="blank" class="btn yellow">
+						<span>冯大辉--丁香园</span>
+						<i class="icon-briefcase top-news-icon"></i>
+					</a>
+					<a href="http://yikebocai.com" target="blank" class="btn purple">
+						<span>一棵菠菜</span>
+						<i class="icon-briefcase top-news-icon"></i>
+					</a>
+					<a href="http://blog.fnil.net/" target="blank" class="btn blue">
+						<span>庄周梦蝶</span>
+						<i class="icon-briefcase top-news-icon"></i>
+					</a>
+					<a href="http://xumingming.sinaapp.com/" target="blank" class="btn yellow">
+						<span>徐明明</span>
+						<i class="icon-briefcase top-news-icon"></i>
+					</a>
+					<a href="http://www.cppblog.com/vczh" target="blank" class="btn blue">
+						<span>陈梓瀚</span>
+					</a>
+				</div>
+			<div class="space20"></div>
+			<h2>博客标签</h2>
+			<ul class="unstyled inline sidebar-tags">
+				<li><a href="#"><i class="icon-tags"></i> Business</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Music</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Internet</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Money</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Google</a></li>
+				<li><a href="#"><i class="icon-tags"></i> TV Shows</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Education</a></li>
+				<li><a href="#"><i class="icon-tags"></i> People</a></li>
+				<li><a href="#"><i class="icon-tags"></i> People</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Math</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Photos</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Electronics</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Apple</a></li>
+				<li><a href="#"><i class="icon-tags"></i> Canada</a></li>
+			</ul>
+			<div class="space20"></div>
+		</div>
+		</div>
+	</div>
+</div>
+<!-- END PAGE CONTENT-->
+<script>
+	function del() {
+		if (confirm("确认删除？")){
+				return true;
+			}else{
+				return false;
+			}
+	}
+</script>
+{% endblock %}			
